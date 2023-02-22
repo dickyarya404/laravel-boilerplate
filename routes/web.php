@@ -31,7 +31,7 @@ Route::group(['namespace' => 'Auth'], function () {
     // Password Reset Routes...
     Route::get('password/reset', 'ForgotPasswordController@showLinkRequestForm')->name('password.request');
     Route::post('password/email', 'ForgotPasswordController@sendResetLinkEmail')->name('password.email');
-    Route::get('password/reset/{token}', 'ResetPasswordController@showResetForm')->name('password.reset');
+    Route::post('password/reset/{token}', 'ResetPasswordController@showResetForm')->name('password.reset');
     Route::post('password/reset', 'ResetPasswordController@reset');
 
     // Confirmation Routes...
@@ -65,6 +65,17 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::get('permissions/{user}/repeat', 'PermissionController@repeat')->name('permissions.repeat');
     Route::get('dashboard/log-chart', 'DashboardController@getLogChartData')->name('dashboard.log.chart');
     Route::get('dashboard/registration-chart', 'DashboardController@getRegistrationChartData')->name('dashboard.registration.chart');
+    Route::get('products', 'PurchaseOrderController@getProductlist')->name('products');
+    Route::get('product/{id}', 'PurchaseOrderController@getProductShow')->name('products.show');
+    Route::get('product/{id}/edit', 'PurchaseOrderController@getProductEdit')->name('products.edit');
+    Route::get('product/{id}/destroy', 'PurchaseOrderController@getProductDestroy')->name('products.destroy');
+    Route::get('purchase-order-lines', 'PurchaseOrderController@getPurchaseOrderLineList')->name('purchase.order.lines');
+    Route::get('purchase-order-lines/create', 'PurchaseOrderController@getPurchaseOrderLineCreate')->name('purchase.order.lines.create');
+    Route::get('purchase-order-lines/{id}', 'PurchaseOrderController@getPurchaseOrderLineShow')->name('purchase.order.lines.show');
+    Route::get('purchase-order-lines/{id}/edit', 'PurchaseOrderController@getPurchaseOrderLineEdit')->name('purchase.order.lines.edit');
+    Route::get('purchase-order-lines/{id}/destroy', 'PurchaseOrderController@getPurchaseOrderLineDestroy')->name('purchase.order.lines.destroy');
+    Route::post('purchase-order-line/{id}/update', 'PurchaseOrderController@postPurchaseOrderLineUpdate')->name('purchase.order.lines.update');
+    Route::post('purchase-order-line/create', 'PurchaseOrderController@postPurchaseOrderLineInsert')->name('purchase.order.lines.insert');
 });
 
 

@@ -10,7 +10,7 @@ use App\Repositories\Access\User\EloquentUserRepository;
 use Validator;
 
 class UserController extends Controller
-{   
+{
     /**
      * Repository
      *
@@ -57,8 +57,7 @@ class UserController extends Controller
     {
         $status = $this->repository->restore($id);
 
-        if($status)
-        {
+        if ($status) {
             return redirect()->route('admin.users')->withFlashSuccess('User Restored Successfully!');
         }
 
@@ -168,8 +167,7 @@ class UserController extends Controller
     {
         $status = $this->repository->destroy($id);
 
-        if($status)
-        {
+        if ($status) {
             return redirect()->route('admin.users')->withFlashSuccess('User Deleted Successfully!');
         }
 
