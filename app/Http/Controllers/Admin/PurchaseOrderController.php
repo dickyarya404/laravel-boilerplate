@@ -54,11 +54,11 @@ class PurchaseOrderController extends Controller
         return view('admin.purchaseOrderLines.create');
     }
 
-    public function posPurchaseOrderLineUpdate()
+    public function postPurchaseOrderLineUpdate()
     {
     }
 
-    public function posPurchaseOrderLineInsert(Request $request, PurchaseOrderLine $purchaseOrderLine)
+    public function postPurchaseOrderLineInsert(Request $request, PurchaseOrderLine $purchaseOrderLine)
     {
         $validator = Validator::make($request->all(), [
             'qty' => 'required',
@@ -68,9 +68,9 @@ class PurchaseOrderController extends Controller
 
         if ($validator->fails()) return redirect()->back()->withErorrs($validator->errors());
 
-        $purchaseOrderLine->qty->$request->post('qty');
-        $purchaseOrderLine->price->$request->post('price');
-        $purchaseOrderLine->discount->$request->post('discount');
+        $purchaseOrderLine->qty = $request->post('qty');
+        $purchaseOrderLine->price = $request->post('price');
+        $purchaseOrderLine->discount = $request->post('discount');
         $purchaseOrderLine->total = (int)$request->post('qty') * (int)$request->post('price') - ((int)$request->post('discount') / 100 * (int)$request->post('price'));
         $purchaseOrderLine->created_at = new DateTime();
         $purchaseOrderLine->updated_at = new DateTime();
